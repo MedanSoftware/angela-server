@@ -38,3 +38,14 @@ module.exports.SSL = {
 		cert : __dirname+'/../../ssl_cert/my-domain.com/server.key'
 	}
 }
+
+/**
+ * Web Push
+ */
+module.exports.webpush = {
+	mail_to : 'agungmasda29@gmail.com',
+	vapid : {
+		public_key : 'BIIQi6cHNvfI4t0UpK461RKXZQ2ZVoLnlGb0rFQKo9kOtnOblhwHi4NzdgN9eKvqlNJ2TVlRiJicKbvG8HZEDX8',
+		private_key : '0QYIwhpCdZJxfaArvRzEbZq8J3mj6chrFOQxzC-NaZo'
+	}
+}

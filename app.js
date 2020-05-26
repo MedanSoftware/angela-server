@@ -30,7 +30,7 @@ app.use(cors({
 /**
  * Initialize angela
  */
-Socketio = require('socket.io')({path : '/AngelaSocketio',transports : ['websocket']}); // initialize socket.io
+Socketio = require('socket.io')({path : '/AngelaSocketio',transports : ['websocket', 'polling']}); // initialize socket.io
 Config = require('./application/config/config'); // load config
 Logger = require('./system/core/Logger'); // load logger
 Angela = require('./system/core/Angela')({
@@ -63,11 +63,15 @@ if (Config.SSL.enable) {
 }
 
 PeerServer.on('connection', (client) => {
-	console.log(client);
+	console.log('Connected Peer Client ID : '+client);
 });
 
 PeerServer.on('disconnect', (client) => {
-	console.log(client);
+	console.log('Disconnected Peer Client ID : '+client);
+});
+
+Socketio.on('connect', socket => {
+	console.log('Socketio connected');
 });
 
 /**

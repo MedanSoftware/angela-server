@@ -1,13 +1,40 @@
 var fs = require('fs');
 var os = require('os');
 var Joi = require('@hapi/joi');
-var fcm = require('fcm-notification');
 var moment = require('moment');
 let uuidv3 = require('uuid/v3');
 var webpush = require('web-push');
+var firebase_admin = require('firebase-admin');
 var router = require('express').Router();
 var router_path = '/webpush';
 var node_schedule = require('node-schedule');
+
+
+var conf = firebase_admin.initializeApp({
+	credential : firebase_admin.credential.applicationDefault()
+});
+
+// console.log(conf)
+// console.log(firebase_admin.messaging())
+
+// var message = {
+//   data: {
+//     score: '850',
+//     time: '2:45'
+//   },
+//   token: 'fWZYhPgBTQSrKadexSY9uM:APA91bEAS1lim3GDqCyWpkGxwi34STMMOq4J4dM_Aq4z8rQ0cx1beCu_-W_s67Gdg18rgJ3_0uJ88IIzw0_y-hBwxTiP2--CpBJnrWhjw5Av98Ix3p_eldPPtn7P8KnFIQYbSCh9hkNB'
+// };
+
+// // Send a message to the device corresponding to the provided
+// // registration token.
+// firebase_admin.messaging().send(message)
+//   .then((response) => {
+//     // Response is a message ID string.
+//     console.log('Successfully sent message:', response);
+//   })
+//   .catch((error) => {
+//     console.log('Error sending message:', error);
+//   });
 
 var Online = {
 	anonymous : new Array(),
@@ -51,10 +78,6 @@ var Online = {
 	})
 }
 
-let publicKey = 'BIIQi6cHNvfI4t0UpK461RKXZQ2ZVoLnlGb0rFQKo9kOtnOblhwHi4NzdgN9eKvqlNJ2TVlRiJicKbvG8HZEDX8';
-let privateKey = '0QYIwhpCdZJxfaArvRzEbZq8J3mj6chrFOQxzC-NaZo';
-let mailTO = 'agungmasda29@gmail.com';
-
 router.get('/', (req, res, next) => {
 	res.json({
 		status:'success',
@@ -69,31 +92,7 @@ router.get('/', (req, res, next) => {
 	console.log(req.body);
 	res.json({status:'success'});
 }).post('/push_notification', (req, res, next) => {
-
-	var FCM = new fcm('./angela-server-testing-firebase-adminsdk-urncc-cb786dca05.json');
-	var message = {
-		data: {
-			score: '850',
-			time: '2:45'
-		},
-		notification:{
-			title : 'Title of notification',
-			body : 'Body of notification'
-		},
-		token : req.body.android.token
-	};
-
-	console.log(message)
-
-	FCM.send(message, function(err, response) {
-		if (err) {
-			console.log('error found', err);
-		} else {
-			console.log('response here', response);
-		}
-	});
-
-	webpush.setVapidDetails('mailto:'+mailTO, publicKey, privateKey);
+	webpush.setVapidDetails('mailto:'+Config.webpush.mail_to, Config.webpush.vapid.public_key, Config.webpush.vapid.private_key);
 	var notification_data = {
 		notification: {
 			lang: req.body.notification.lang,
