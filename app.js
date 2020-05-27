@@ -9,7 +9,6 @@ var express = require('express');
 var http_error = require('http-errors');
 var body_parser = require('body-parser');
 var cookie_parser = require('cookie-parser');
-var peerjs_server = require('peer').ExpressPeerServer;
 var app = express();
 var server = http.createServer(app);
 
@@ -42,13 +41,8 @@ Angela = require('./system/core/Angela')({
  * Getting port to listen
  */
 var ExpressHTTP = server.listen(process.env.PORT || Config.ports.http);
-var PeerServer = peerjs_server(ExpressHTTP, { debug : Config.environment == 'development' });
 
 Socketio.listen(ExpressHTTP); // Socket.io listening on HTTP
-
-if (Config.peer_server) {
-	app.use('/AngelaPeerJs', PeerServer); // PeerJs listening on HTTP
-}
 
 if (Config.SSL.enable) {
 	if (fs.existsSync(Config.SSL.files.key) && fs.existsSync(Config.SSL.files.cert)) {
@@ -64,14 +58,6 @@ if (Config.SSL.enable) {
 } else {
 	Logger.Winston().info('SSL disabled');
 }
-
-PeerServer.on('connection', (client) => {
-	console.log('Connected Peer Client ID : '+client);
-});
-
-PeerServer.on('disconnect', (client) => {
-	console.log('Disconnected Peer Client ID : '+client);
-});
 
 Socketio.on('connect', socket => {
 	console.log('Connected Socketio Client ID '+socket.id);

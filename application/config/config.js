@@ -19,13 +19,6 @@ module.exports.environment = 'development';
 module.exports.active_database = 'default';
 
 /**
- * PeerJs
- * 
- * @type {Boolean}
- */
-module.exports.peer_server = false;
-
-/**
  * Ports setting
  * 
  * @type {Object}
