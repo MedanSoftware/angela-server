@@ -1,9 +1,6 @@
-var fs = require('fs');
 var os = require('os');
-var Joi = require('@hapi/joi');
 var moment = require('moment');
 var moment_duration_format = require('moment-duration-format');
-let uuidv3 = require('uuid/v3');
 var router = require('express').Router();
 var router_path = '/';
 

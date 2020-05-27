@@ -1,12 +1,6 @@
-var fs = require('fs');
-var os = require('os');
 var Joi = require('@hapi/joi');
-var moment = require('moment');
-let uuidv3 = require('uuid/v3');
-var webpush = require('web-push');
 var router = require('express').Router();
 var router_path = '/online';
-var node_schedule = require('node-schedule');
 
 var Online = {
 	anonymous : new Array(),
@@ -50,4 +44,4 @@ var Online = {
 	})
 }
 
-module.exports = { router, router_path }
+module.exports = { router, router_path, Online }

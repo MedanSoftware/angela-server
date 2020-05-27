@@ -2,7 +2,7 @@ var os = require('os');
 var moment = require('moment');
 var moment_duration_format = require('moment-duration-format');
 var router = require('express').Router();
-var router_path = '/user';
+var router_path = '/notification';
 
 router.get('/', (req, res, next) => {
 	res.json({

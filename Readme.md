@@ -2,17 +2,19 @@
 
 ## Configuration
 
-### Application
+### Application Config
 
-`application/config/config.js`
+setup file : `application/config/config.js`
 
-### Database
+### Database Config
 
-`application/config/database.js`
+setup file : `application/config/database.js`
 
 ---
 
 ## WebSocket - Socket.io
+
+Read more about [Socket.io](https://socket.io/docs/)
 
 > connecting to websocket server
 
@@ -50,6 +52,8 @@ socket.on('connection', (socket) => {
 ---
 
 ## PeerJs
+
+Read more about [PeerJs](https://peerjs.com/docs.html)
 
 > connecting to peerjs server
 

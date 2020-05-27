@@ -30,7 +30,7 @@ app.use(cors({
 /**
  * Initialize angela
  */
-Socketio = require('socket.io')({path : '/AngelaSocketio',transports : ['websocket', 'polling']}); // initialize socket.io
+Socketio = require('socket.io')({ path : '/AngelaSocketio' }); // initialize socket.io
 Config = require('./application/config/config'); // load config
 Logger = require('./system/core/Logger'); // load logger
 Angela = require('./system/core/Angela')({
@@ -42,10 +42,13 @@ Angela = require('./system/core/Angela')({
  * Getting port to listen
  */
 var ExpressHTTP = server.listen(process.env.PORT || Config.ports.http);
-var PeerServer = peerjs_server(ExpressHTTP, { debug : false });
+var PeerServer = peerjs_server(ExpressHTTP, { debug : Config.environment == 'development' });
 
-app.use('/AngelaPeerJs', PeerServer); // PeerJs listening on HTTP
 Socketio.listen(ExpressHTTP); // Socket.io listening on HTTP
+
+if (Config.peer_server) {
+	app.use('/AngelaPeerJs', PeerServer); // PeerJs listening on HTTP
+}
 
 if (Config.SSL.enable) {
 	if (fs.existsSync(Config.SSL.files.key) && fs.existsSync(Config.SSL.files.cert)) {
@@ -71,7 +74,8 @@ PeerServer.on('disconnect', (client) => {
 });
 
 Socketio.on('connect', socket => {
-	console.log('Socketio connected');
+	console.log('Connected Socketio Client ID '+socket.id);
+	Socketio.emit('from_server', {oke:'banget'})
 });
 
 /**

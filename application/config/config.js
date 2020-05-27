@@ -9,12 +9,21 @@ module.exports.app = {
 	version : '1.0.0'
 }
 
+module.exports.environment = 'development';
+
 /**
  * Active database
  * 
  * @type {String}
  */
 module.exports.active_database = 'default';
+
+/**
+ * PeerJs
+ * 
+ * @type {Boolean}
+ */
+module.exports.peer_server = false;
 
 /**
  * Ports setting
