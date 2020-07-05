@@ -29,7 +29,7 @@ module.exports.callback = function(callback) {
 		if (typeof callback == 'function') {
 			callback(...Array.prototype.slice.call(arguments, 1));
 		} else {
-			eval(callback+'(...Array.prototype.slice.call(arguments,1))');
+			eval(callback+'(...Array.prototype.slice.call(arguments, 1))');
 		}
 	}
 }
@@ -46,7 +46,7 @@ module.exports.callback = function(callback) {
  * @return {Array}               upload response
  */
 module.exports.file_upload = function(req, res, next = false, field_name, options, callback) {
-	let destination_path = (options.destination !== undefined)?this.site_data_folder+options.destination:this.site_data_folder+'uploads/';
+	let destination_path = (options.destination !== undefined)?this.site_data_folder()+options.destination:this.site_data_folder()+'uploads/';
 	let allowed_type = (options.allowed_type !== undefined)?options.allowed_type:'file_type';
 	let whitelist = (options.whitelist !== undefined)?options.whitelist:['images','documents'];
 

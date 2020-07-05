@@ -17,6 +17,9 @@ module.exports = (sequelize, DataTypes) => {
 		name : {
 			type : DataTypes.STRING(240)
 		},
+		webpush_key : {
+			type : DataTypes.STRING(10)
+		},
 		description : {
 			type : DataTypes.STRING(240),
 			allowNull : true

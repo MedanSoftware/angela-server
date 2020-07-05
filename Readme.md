@@ -1,5 +1,8 @@
 # Angela Server
 
+Ulangi angela server, jadikan namanya angela saja 
+meniru system codeigniter menggunakan view engine handlebars
+
 ## Configuration
 
 ### Application Config

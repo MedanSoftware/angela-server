@@ -1,7 +1,6 @@
-var fs = require('fs');
-
 /**
  * App name
+ *
  * @type {Object}
  */
 module.exports.app = {
@@ -9,18 +8,40 @@ module.exports.app = {
 	version : '1.0.0'
 }
 
+/**
+ * Environment
+ *
+ * @type {String}
+ */
 module.exports.environment = 'development';
 
 /**
+ * Encryption key
+ * @type {String}
+ */
+module.exports.encryption_key = 'angela';
+
+/**
  * Active database
- * 
+ *
  * @type {String}
  */
 module.exports.active_database = 'default';
 
 /**
+ * Auto-loader all files
+ *
+ * @type {Object}
+ */
+module.exports.autoloader = {
+	helpers : true,
+	libraries : true,
+	models : true
+};
+
+/**
  * Ports setting
- * 
+ *
  * @type {Object}
  */
 module.exports.ports = {
@@ -30,7 +51,7 @@ module.exports.ports = {
 
 /**
  * SSL setting
- * 
+ *
  * @type {Object}
  */
 module.exports.SSL = {
