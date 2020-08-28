@@ -7,7 +7,7 @@
  * @return {Mixed}
  */
 module.exports.arrayobject_find_value = (arrayName, searchKey, searchValue) => {
-	let find = arrayName.findIndex(i => i[searchKey] === searchValue);
+	let find = arrayName.findIndex(i => i[searchKey] == searchValue);
 	return (find !== -1)?find:false;
 }
 

@@ -142,7 +142,9 @@ module.exports = function(config){
 					if (model.name.toLowerCase() == 'online') {
 						model.sync({ force: true }).then(() => {
 							Logger.Winston().info('Force create table "'+model.name.toLowerCase()+'"');
-						}, error => { callback(error, callback) });
+							callback(null, callback)
+							Logger.Winston().info('Model initialized');
+						}, error => { callback(error.original.sqlMessage, callback) });
 						return;
 					}
 
@@ -155,9 +157,6 @@ module.exports = function(config){
 						Logger.Winston().error('Failed to create table : "'+model.name.toLowerCase()+'" !');
 					});
 				});
-
-				callback(null, callback);
-				Logger.Winston().info('Model initialized');
 			}
 		},
 
