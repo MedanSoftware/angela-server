@@ -1,5 +1,3 @@
-(typeof(PhusionPassenger) !== 'undefined')?PhusionPassenger.configure({ autoInstall: false }):false // For NodeJs On Plesk Panel
-
 var fs = require('fs');
 var path = require('path');
 var cors = require('cors');
