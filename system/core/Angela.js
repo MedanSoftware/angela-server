@@ -130,6 +130,7 @@ module.exports = function(config){
 		 * @param  {Function} callback
 		 */
 		function initializeModel(error, callback) {
+
 			if (typeof db == 'object') {
 				var target = __dirname+'/../../application/models/';
 				fs.readdirSync(target).filter(file => {
@@ -142,9 +143,8 @@ module.exports = function(config){
 					if (model.name.toLowerCase() == 'online') {
 						model.sync({ force: true }).then(() => {
 							Logger.Winston().info('Force create table "'+model.name.toLowerCase()+'"');
-							callback(null, callback)
 							Logger.Winston().info('Model initialized');
-						}, error => { callback(error.original.sqlMessage, callback) });
+						}, error => { Logger.Winston().error(error.original.sqlMessage) });
 						return;
 					}
 
@@ -157,6 +157,8 @@ module.exports = function(config){
 						Logger.Winston().error('Failed to create table : "'+model.name.toLowerCase()+'" !');
 					});
 				});
+
+				callback(null, callback);
 			}
 		},
 
