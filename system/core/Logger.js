@@ -104,3 +104,7 @@ module.exports.Winston = function() {
 		]
 	}); // initialize winston logger
 }
+
+module.exports.Promise = function(error) {
+	console.log(error);
+}
