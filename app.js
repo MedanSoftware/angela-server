@@ -10,6 +10,10 @@ var cookie_parser = require('cookie-parser');
 var app = express();
 var server = http.createServer(app);
 
+r = require('rethinkdb');
+rethinkdb = r.connect({ host: 'localhost', port: 28015});
+require('events').EventEmitter.defaultMaxListeners = 16;
+
 /**
  * Express middleware
  */
@@ -32,7 +36,7 @@ Config = require('./application/config/config'); // load config
 Logger = require('./system/core/Logger'); // load logger
 Angela = require('./system/core/Angela')({
 	express : app,
-	db_group : Config.active_database
+	// db_group : Config.active_database
 }); // load system
 
 /**
