@@ -1,6 +1,8 @@
 module.exports = function(config){
 	var fs = require('fs');
-	var db = require(__dirname+'/../../application/config/database')((config !== undefined && config.db_group !== undefined)?config.db_group:false);
+	if (config !== undefined && config.db_group !== undefined) {
+		var db = require(__dirname+'/../../application/config/database')(config.db_group);
+	}
 	var rfs = require('rotating-file-stream');
 	var path = require('path');
 	var async = require('async');
