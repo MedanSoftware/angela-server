@@ -159,9 +159,9 @@ module.exports = function(config){
 						Logger.Winston().error('Failed to create table : "'+model.name.toLowerCase()+'" !');
 					});
 				});
-
-				callback(null, callback);
 			}
+
+			callback(null, callback);
 		},
 
 		/**
