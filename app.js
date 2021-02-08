@@ -61,11 +61,6 @@ if (Config.SSL.enable) {
 	Logger.Winston().info('SSL disabled');
 }
 
-Socketio.on('connect', socket => {
-	console.log('Connected Socketio Client ID '+socket.id);
-	Socketio.emit('from_server', {oke:'banget'})
-});
-
 /**
  * Error handler (404)
  */
